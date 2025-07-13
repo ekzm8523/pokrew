@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Typography, Button, Box, CircularProgress } from "@mui/material";
-import PointForm from "./PointForm";
-import { apiRequest, API_ENDPOINTS } from "../config/api";
+import React, { useEffect, useState } from 'react';
+import { Typography, Button, Box, CircularProgress } from '@mui/material';
+import PointForm from './PointForm';
+import { apiRequest, API_ENDPOINTS } from '../config/api';
 
 function MemberDetail({ member, setPage, token }) {
   const [history, setHistory] = useState([]);
@@ -12,14 +12,14 @@ function MemberDetail({ member, setPage, token }) {
     apiRequest(API_ENDPOINTS.USERS.HISTORY(member.id))
       .then((data) => setHistory(data))
       .catch((error) => {
-        console.error("회원 내역 로딩 실패:", error);
+        console.error('회원 내역 로딩 실패:', error);
       })
       .finally(() => setLoading(false));
   }, [member, token]);
 
   return (
     <Box>
-      <Button onClick={() => setPage("members")}>← 회원 목록</Button>
+      <Button onClick={() => setPage('members')}>← 회원 목록</Button>
       <Typography variant="h4">{member.name}</Typography>
       <Typography>현재 포인트: {member.points} PP</Typography>
       <Typography variant="h6" sx={{ mt: 2 }}>
@@ -41,4 +41,4 @@ function MemberDetail({ member, setPage, token }) {
   );
 }
 
-export default MemberDetail; 
+export default MemberDetail;

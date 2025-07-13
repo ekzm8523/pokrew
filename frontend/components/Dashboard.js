@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
-import {
-  Grid,
-  Box,
-  CircularProgress,
-  Chip,
-} from "@mui/material";
-import {
-  TrendingUp,
-  People,
-  AccountBalance,
-  Receipt,
-  Schedule,
-  Casino,
-} from "@mui/icons-material";
-import { apiRequest, API_ENDPOINTS } from "../config/api";
-import { darkTheme } from "../constants/theme";
-import { monthlyPPFlowData, ppDistributionData, dummyStats } from "../constants/dummyDashboardData";
-import { formatPP } from "../utils/format";
-import StatCard from "./dashboard/StatCard";
-import ModeCard from "./dashboard/ModeCard";
-import PPFlowChart from "./dashboard/PPFlowChart";
-import PPDistributionChart from "./dashboard/PPDistributionChart";
-import RecentPPLogTable from "./dashboard/RecentPPLogTable";
-import TopMembersCard from "./dashboard/TopMembersCard";
+import React, { useEffect, useState } from 'react';
+import { Grid, Box, CircularProgress, Chip } from '@mui/material';
+import { TrendingUp, People, AccountBalance, Receipt, Schedule, Casino } from '@mui/icons-material';
+import { apiRequest, API_ENDPOINTS } from '../config/api';
+import { darkTheme } from '../constants/theme';
+import { monthlyPPFlowData, ppDistributionData, dummyStats } from '../constants/dummyDashboardData';
+import { formatPP } from '../utils/format';
+import StatCard from './dashboard/StatCard';
+import ModeCard from './dashboard/ModeCard';
+import PPFlowChart from './dashboard/PPFlowChart';
+import PPDistributionChart from './dashboard/PPDistributionChart';
+import RecentPPLogTable from './dashboard/RecentPPLogTable';
+import TopMembersCard from './dashboard/TopMembersCard';
 
 function Dashboard({ user, token }) {
   const [stats, setStats] = useState(null);
@@ -33,12 +21,12 @@ function Dashboard({ user, token }) {
   useEffect(() => {
     setLoading(true);
     const endpoint = user.isAdmin ? API_ENDPOINTS.DASHBOARD.ADMIN : API_ENDPOINTS.DASHBOARD.USER;
-    
+
     // 메인 대시보드 데이터 로드
     apiRequest(endpoint)
       .then((data) => setStats(data))
       .catch((error) => {
-        console.error("대시보드 데이터 로딩 실패:", error);
+        console.error('대시보드 데이터 로딩 실패:', error);
       });
 
     // 관리자인 경우 추가 데이터 로드
@@ -47,14 +35,14 @@ function Dashboard({ user, token }) {
       apiRequest(API_ENDPOINTS.DASHBOARD.MONTHLY_FLOW)
         .then((data) => setMonthlyFlowData(data))
         .catch((error) => {
-          console.error("월별 PP 흐름 데이터 로딩 실패:", error);
+          console.error('월별 PP 흐름 데이터 로딩 실패:', error);
         });
 
       // PP 분포 데이터 로드
       apiRequest(API_ENDPOINTS.DASHBOARD.PP_DISTRIBUTION)
         .then((data) => setPpDistributionDataState(data))
         .catch((error) => {
-          console.error("PP 분포 데이터 로딩 실패:", error);
+          console.error('PP 분포 데이터 로딩 실패:', error);
         });
     }
 
@@ -65,10 +53,10 @@ function Dashboard({ user, token }) {
     return (
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
           bgcolor: darkTheme.background,
         }}
       >
@@ -78,7 +66,7 @@ function Dashboard({ user, token }) {
   }
 
   return (
-    <Box sx={{ bgcolor: darkTheme.background, minHeight: "100vh", p: 3 }}>
+    <Box sx={{ bgcolor: darkTheme.background, minHeight: '100vh', p: 3 }}>
       {/* 상단 모드 카드들 */}
       <Grid container spacing={2} sx={{ mb: 4 }}>
         <Grid item xs={12} md={4}>
@@ -168,4 +156,4 @@ function Dashboard({ user, token }) {
   );
 }
 
-export default Dashboard; 
+export default Dashboard;

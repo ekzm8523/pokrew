@@ -12,6 +12,18 @@ feat(login): 로그인 기능 추가
 fix(server): 서버 오류 수정
 docs(readme): 사용법 문서 추가
 
+# 프로젝트 구조
+
+## 디렉토리 구조
+- `frontend/`: React 프론트엔드 애플리케이션
+- `server/`: Node.js 백엔드 서버
+- 루트: 모노레포 설정 및 공통 도구
+
+## 실행 명령어
+- `npm run dev`: 프론트와 백엔드를 동시에 실행
+- `npm start`: 프론트엔드만 실행
+- `npm run server`: 백엔드만 실행
+
 # 자바스크립트 개발 가이드
 
 ## 코드 스타일
@@ -24,6 +36,7 @@ docs(readme): 사용법 문서 추가
 - `npm run lint:fix`로 자동 수정 가능한 문제들을 해결하세요.
 - `npm run format`으로 코드 포매팅을 적용하세요.
 - 커밋 전 반드시 lint와 format을 실행하세요.
+- **pre-commit 훅이 자동으로 lint와 format을 실행합니다.**
 
 ## 주요 규칙
 - 들여쓰기는 2칸 공백 사용

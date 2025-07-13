@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Typography,
   Box,
@@ -19,26 +19,23 @@ import {
   FormControl,
   Alert,
   CircularProgress,
-} from "@mui/material";
-import { apiRequest, API_ENDPOINTS } from "../config/api";
+} from '@mui/material';
+import { apiRequest, API_ENDPOINTS } from '../config/api';
 
 function AdminPage({ user, token, refreshAllData }) {
   const [members, setMembers] = useState([]);
   const [history, setHistory] = useState([]);
-  const [memberId, setMemberId] = useState("");
-  const [type, setType] = useState("입금");
-  const [amount, setAmount] = useState("");
-  const [reason, setReason] = useState("");
+  const [memberId, setMemberId] = useState('');
+  const [type, setType] = useState('입금');
+  const [amount, setAmount] = useState('');
+  const [reason, setReason] = useState('');
   const [loading, setLoading] = useState(true);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState('');
 
   // 회원 목록과 최근 내역 불러오기
   useEffect(() => {
     setLoading(true);
-    Promise.all([
-      apiRequest(API_ENDPOINTS.USERS.LIST),
-      apiRequest(API_ENDPOINTS.DASHBOARD.ADMIN),
-    ])
+    Promise.all([apiRequest(API_ENDPOINTS.USERS.LIST), apiRequest(API_ENDPOINTS.DASHBOARD.ADMIN)])
       .then(([membersData, dashboardData]) => {
         setMembers(membersData);
         setHistory(dashboardData.recentHistory || []);
@@ -47,7 +44,7 @@ function AdminPage({ user, token, refreshAllData }) {
         }
       })
       .catch((error) => {
-        console.error("데이터 로딩 실패:", error);
+        console.error('데이터 로딩 실패:', error);
       })
       .finally(() => setLoading(false));
   }, [token]);
@@ -58,16 +55,16 @@ function AdminPage({ user, token, refreshAllData }) {
 
     try {
       const data = await apiRequest(API_ENDPOINTS.USERS.POINTS(memberId), {
-        method: "PATCH",
+        method: 'PATCH',
         body: JSON.stringify({ type, amount: Number(amount), reason }),
       });
-      
+
       // 회원 목록 업데이트
-      setMembers(members.map(m => 
-        m.id === Number(memberId) ? { ...m, points: data.newPoints } : m
-      ));
+      setMembers(
+        members.map((m) => (m.id === Number(memberId) ? { ...m, points: data.newPoints } : m))
+      );
       // 내역에 추가
-      const member = members.find(m => m.id === Number(memberId));
+      const member = members.find((m) => m.id === Number(memberId));
       setHistory([
         {
           createdAt: new Date().toISOString(),
@@ -78,13 +75,13 @@ function AdminPage({ user, token, refreshAllData }) {
         },
         ...history,
       ]);
-      setAmount("");
-      setReason("");
-      setSuccess("포인트가 성공적으로 조정되었습니다!");
-      setTimeout(() => setSuccess(""), 3000);
+      setAmount('');
+      setReason('');
+      setSuccess('포인트가 성공적으로 조정되었습니다!');
+      setTimeout(() => setSuccess(''), 3000);
       if (refreshAllData) refreshAllData();
     } catch (err) {
-      setSuccess(err.message || "서버 오류");
+      setSuccess(err.message || '서버 오류');
     }
   };
 
@@ -92,8 +89,10 @@ function AdminPage({ user, token, refreshAllData }) {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 2 }}>관리자 PP 관리</Typography>
-      
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        관리자 PP 관리
+      </Typography>
+
       {success && (
         <Alert severity="success" sx={{ mb: 2 }}>
           {success}
@@ -102,7 +101,7 @@ function AdminPage({ user, token, refreshAllData }) {
 
       <Card sx={{ mb: 3 }}>
         <CardContent>
-          <form onSubmit={handleSubmit} style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
             <FormControl sx={{ minWidth: 120 }}>
               <InputLabel>회원</InputLabel>
               <Select
@@ -149,8 +148,10 @@ function AdminPage({ user, token, refreshAllData }) {
           </form>
         </CardContent>
       </Card>
-      
-      <Typography variant="h6" sx={{ mb: 2 }}>최근 처리 내역</Typography>
+
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        최근 처리 내역
+      </Typography>
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
@@ -179,4 +180,4 @@ function AdminPage({ user, token, refreshAllData }) {
   );
 }
 
-export default AdminPage; 
+export default AdminPage;

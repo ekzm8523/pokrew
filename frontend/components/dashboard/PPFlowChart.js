@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, CardContent, Typography, Box, Chip } from "@mui/material";
+import React from 'react';
+import { Card, CardContent, Typography, Box, Chip } from '@mui/material';
 import {
   LineChart,
   Line,
@@ -9,8 +9,8 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from "recharts";
-import { darkTheme } from "../../constants/theme";
+} from 'recharts';
+import { darkTheme } from '../../constants/theme';
 
 const PPFlowChart = ({ data }) => {
   return (
@@ -23,10 +23,7 @@ const PPFlowChart = ({ data }) => {
     >
       <CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-          <Typography
-            variant="h6"
-            sx={{ color: darkTheme.textPrimary, flexGrow: 1 }}
-          >
+          <Typography variant="h6" sx={{ color: darkTheme.textPrimary, flexGrow: 1 }}>
             월별 PP 흐름
           </Typography>
           <Chip label="TODO: 실제 데이터 연동 필요" size="small" color="warning" sx={{ ml: 1 }} />
@@ -39,10 +36,7 @@ const PPFlowChart = ({ data }) => {
               stroke={darkTheme.textSecondary}
               tick={{ fill: darkTheme.textSecondary }}
             />
-            <YAxis
-              stroke={darkTheme.textSecondary}
-              tick={{ fill: darkTheme.textSecondary }}
-            />
+            <YAxis stroke={darkTheme.textSecondary} tick={{ fill: darkTheme.textSecondary }} />
             <Tooltip
               contentStyle={{
                 backgroundColor: darkTheme.cardBackground,
@@ -72,4 +66,4 @@ const PPFlowChart = ({ data }) => {
   );
 };
 
-export default PPFlowChart; 
+export default PPFlowChart;

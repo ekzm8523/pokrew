@@ -1,18 +1,16 @@
-import React, { useState } from "react";
-import { Box, TextField, Button, MenuItem } from "@mui/material";
+import React, { useState } from 'react';
+import { Box, TextField, Button, MenuItem } from '@mui/material';
 
 function PointForm({ member }) {
-  const [type, setType] = useState("입금");
-  const [amount, setAmount] = useState("");
-  const [reason, setReason] = useState("");
+  const [type, setType] = useState('입금');
+  const [amount, setAmount] = useState('');
+  const [reason, setReason] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(
-      `${member.name}님에게 ${type} ${amount}PP (${reason}) 처리 (실제 저장은 미구현)`
-    );
-    setAmount("");
-    setReason("");
+    alert(`${member.name}님에게 ${type} ${amount}PP (${reason}) 처리 (실제 저장은 미구현)`);
+    setAmount('');
+    setReason('');
   };
 
   return (
@@ -49,4 +47,4 @@ function PointForm({ member }) {
   );
 }
 
-export default PointForm; 
+export default PointForm;

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -9,7 +9,7 @@ import {
   Paper,
   Button,
   CircularProgress,
-} from "@mui/material";
+} from '@mui/material';
 
 function MemberList({ members, loading, onSelect, setPage }) {
   if (loading) return <CircularProgress sx={{ mt: 4 }} />;
@@ -32,14 +32,14 @@ function MemberList({ members, loading, onSelect, setPage }) {
               <TableCell>{member.name}</TableCell>
               <TableCell>{member.points} PP</TableCell>
               <TableCell>{member.availablePoints} PP</TableCell>
-              <TableCell>{(member.points - member.availablePoints)} PP</TableCell>
+              <TableCell>{member.points - member.availablePoints} PP</TableCell>
               <TableCell>{member.email}</TableCell>
               <TableCell>
                 <Button
                   variant="outlined"
                   onClick={() => {
                     onSelect(member);
-                    setPage("memberDetail");
+                    setPage('memberDetail');
                   }}
                 >
                   보기
@@ -53,4 +53,4 @@ function MemberList({ members, loading, onSelect, setPage }) {
   );
 }
 
-export default MemberList; 
+export default MemberList;

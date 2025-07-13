@@ -1,15 +1,7 @@
-import React from "react";
-import { Card, CardContent, Typography, Box, Chip } from "@mui/material";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import { darkTheme } from "../../constants/theme";
+import React from 'react';
+import { Card, CardContent, Typography, Box, Chip } from '@mui/material';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { darkTheme } from '../../constants/theme';
 
 const PPDistributionChart = ({ data }) => {
   return (
@@ -22,10 +14,7 @@ const PPDistributionChart = ({ data }) => {
     >
       <CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-          <Typography
-            variant="h6"
-            sx={{ color: darkTheme.textPrimary, flexGrow: 1 }}
-          >
+          <Typography variant="h6" sx={{ color: darkTheme.textPrimary, flexGrow: 1 }}>
             PP 분포 (사용자 티어별)
           </Typography>
           <Chip label="TODO: 실제 데이터 연동 필요" size="small" color="warning" sx={{ ml: 1 }} />
@@ -38,10 +27,7 @@ const PPDistributionChart = ({ data }) => {
               stroke={darkTheme.textSecondary}
               tick={{ fill: darkTheme.textSecondary }}
             />
-            <YAxis
-              stroke={darkTheme.textSecondary}
-              tick={{ fill: darkTheme.textSecondary }}
-            />
+            <YAxis stroke={darkTheme.textSecondary} tick={{ fill: darkTheme.textSecondary }} />
             <Tooltip
               contentStyle={{
                 backgroundColor: darkTheme.cardBackground,
@@ -57,4 +43,4 @@ const PPDistributionChart = ({ data }) => {
   );
 };
 
-export default PPDistributionChart; 
+export default PPDistributionChart;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Typography,
   Box,
@@ -21,36 +21,33 @@ import {
   MenuItem,
   IconButton,
   CircularProgress,
-} from "@mui/material";
-import { Add, Remove } from "@mui/icons-material";
-import { apiRequest, API_ENDPOINTS } from "../config/api";
+} from '@mui/material';
+import { Add, Remove } from '@mui/icons-material';
+import { apiRequest, API_ENDPOINTS } from '../config/api';
 
 function RequestPage({ user, token, refreshUser, refreshAllData }) {
-  const [selectedProductId, setSelectedProductId] = useState("");
+  const [selectedProductId, setSelectedProductId] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [requests, setRequests] = useState([]);
   const [products, setProducts] = useState([]);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(true);
 
   // 상품 목록과 내 요청 목록 불러오기
   useEffect(() => {
     setLoading(true);
-    Promise.all([
-      apiRequest(API_ENDPOINTS.PRODUCTS.LIST),
-      apiRequest(API_ENDPOINTS.REQUESTS.MY),
-    ])
+    Promise.all([apiRequest(API_ENDPOINTS.PRODUCTS.LIST), apiRequest(API_ENDPOINTS.REQUESTS.MY)])
       .then(([productsData, requestsData]) => {
         setProducts(productsData);
         setRequests(requestsData);
       })
       .catch((error) => {
-        console.error("데이터 로딩 실패:", error);
+        console.error('데이터 로딩 실패:', error);
       })
       .finally(() => setLoading(false));
   }, [token]);
 
-  const selectedProduct = products.find(p => p.id === Number(selectedProductId));
+  const selectedProduct = products.find((p) => p.id === Number(selectedProductId));
   const points = typeof user.points === 'number' ? user.points : 0;
   const availablePoints = typeof user.availablePoints === 'number' ? user.availablePoints : 0;
   const pendingPoints = typeof user.pendingPoints === 'number' ? user.pendingPoints : 0;
@@ -58,8 +55,8 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
   const canAfford = totalCost <= availablePoints;
   const maxQuantity =
     selectedProduct &&
-    typeof availablePoints === "number" &&
-    typeof selectedProduct.price === "number" &&
+    typeof availablePoints === 'number' &&
+    typeof selectedProduct.price === 'number' &&
     selectedProduct.price > 0
       ? Math.floor(availablePoints / selectedProduct.price)
       : 0;
@@ -78,7 +75,7 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
 
     try {
       await apiRequest(API_ENDPOINTS.REQUESTS.CREATE, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({
           productId: selectedProduct.id,
           quantity: quantity,
@@ -93,26 +90,26 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
         productName: selectedProduct.name,
         productLink: selectedProduct.link,
         quantity,
-        status: "대기중",
+        status: '대기중',
       };
       setRequests([newRequest, ...requests]);
-      setSuccess("PP 사용 요청이 제출되었습니다!");
-      setSelectedProductId("");
+      setSuccess('PP 사용 요청이 제출되었습니다!');
+      setSelectedProductId('');
       setQuantity(1);
-      setTimeout(() => setSuccess(""), 3000);
+      setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
-      setSuccess(err.message || "서버 오류");
+      setSuccess(err.message || '서버 오류');
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "승인됨":
-        return "success";
-      case "거부됨":
-        return "error";
+      case '승인됨':
+        return 'success';
+      case '거부됨':
+        return 'error';
       default:
-        return "warning";
+        return 'warning';
     }
   };
 
@@ -120,19 +117,21 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 2 }}>PP 사용 요청</Typography>
-      
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        PP 사용 요청
+      </Typography>
+
       {/* 내 PP 정보를 Card 밖으로 이동 */}
-      <Box 
+      <Box
         style={{
           marginBottom: '24px',
           padding: '16px',
           backgroundColor: '#d5d5d5',
           borderRadius: '4px',
-          border: '1px solid #ccc'
+          border: '1px solid #ccc',
         }}
       >
-        <Typography variant="h6" sx={{ color: "#FFD700", fontWeight: "bold" }}>
+        <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 'bold' }}>
           내 PP: {points} PP (현재) / {availablePoints} PP (사용 가능)
         </Typography>
         {pendingPoints > 0 && (
@@ -141,17 +140,19 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
           </Typography>
         )}
       </Box>
-      
+
       <Card sx={{ mb: 3 }}>
         <CardContent>
-          <Typography variant="h6" sx={{ mb: 2 }}>새 요청 작성</Typography>
-          
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            새 요청 작성
+          </Typography>
+
           {success && (
             <Alert severity="success" sx={{ mb: 2 }}>
               {success}
             </Alert>
           )}
-          
+
           <form onSubmit={handleSubmit}>
             <FormControl fullWidth sx={{ mb: 2 }}>
               <InputLabel>상품 선택</InputLabel>
@@ -164,11 +165,13 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
                 }}
                 required
               >
-                {products.filter(p => p.isActive).map((product) => (
-                  <MenuItem key={product.id} value={product.id}>
-                    {product.name} - {product.price} PP
-                  </MenuItem>
-                ))}
+                {products
+                  .filter((p) => p.isActive)
+                  .map((product) => (
+                    <MenuItem key={product.id} value={product.id}>
+                      {product.name} - {product.price} PP
+                    </MenuItem>
+                  ))}
               </Select>
             </FormControl>
 
@@ -177,7 +180,7 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
                 <Typography variant="body2" sx={{ mb: 1 }}>
                   수량 선택 (최대 {maxQuantity}개)
                 </Typography>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                   <IconButton
                     onClick={() => handleQuantityChange(quantity - 1)}
                     disabled={quantity <= 1}
@@ -216,7 +219,9 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
         </CardContent>
       </Card>
 
-      <Typography variant="h6" sx={{ mb: 2 }}>내 요청 내역</Typography>
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        내 요청 내역
+      </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -260,4 +265,4 @@ function RequestPage({ user, token, refreshUser, refreshAllData }) {
   );
 }
 
-export default RequestPage; 
+export default RequestPage;

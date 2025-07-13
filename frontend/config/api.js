@@ -9,7 +9,7 @@ const API_CONFIG = {
   production: {
     baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5001',
     timeout: 10000,
-  }
+  },
 };
 
 // 현재 환경에 따른 설정
@@ -70,7 +70,7 @@ export const API_CONFIG_EXPORT = config;
 export const apiRequest = async (endpoint, options = {}) => {
   const url = getApiUrl(endpoint);
   const token = localStorage.getItem('pokrew_token');
-  
+
   const defaultOptions = {
     headers: {
       'Content-Type': 'application/json',
@@ -93,20 +93,20 @@ export const apiRequest = async (endpoint, options = {}) => {
     url,
     method: finalOptions.method || 'GET',
     headers: finalOptions.headers,
-    body: finalOptions.body
+    body: finalOptions.body,
   });
 
   try {
     const response = await fetch(url, finalOptions);
     console.log('API 응답 상태:', response.status, response.statusText);
-    
+
     const data = await response.json();
     console.log('API 응답 데이터:', data);
-    
+
     if (!response.ok) {
       throw new Error(data.message || 'API 요청 실패');
     }
-    
+
     return data;
   } catch (error) {
     console.error('API 요청 오류:', error);
@@ -123,4 +123,4 @@ const apiConfig = {
   config: API_CONFIG_EXPORT,
 };
 
-export default apiConfig; 
+export default apiConfig;

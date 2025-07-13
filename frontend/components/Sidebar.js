@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Drawer,
   List,
@@ -9,7 +9,7 @@ import {
   Divider,
   Typography,
   Box,
-} from "@mui/material";
+} from '@mui/material';
 import {
   Dashboard,
   People,
@@ -19,55 +19,55 @@ import {
   Store,
   Assessment,
   Logout,
-} from "@mui/icons-material";
+} from '@mui/icons-material';
 
 const drawerWidth = 280;
 
 function Sidebar({ page, setPage, isAdmin, user, onLogout }) {
   const menuItems = [
     {
-      title: "대시보드",
+      title: '대시보드',
       icon: <Dashboard />,
-      page: "dashboard",
+      page: 'dashboard',
       forAll: true,
     },
     {
-      title: "마이페이지",
+      title: '마이페이지',
       icon: <Person />,
-      page: "mypage",
+      page: 'mypage',
       forAll: true,
     },
     {
-      title: "PP 사용 요청",
+      title: 'PP 사용 요청',
       icon: <RequestPage />,
-      page: "request",
+      page: 'request',
       forAll: true,
     },
   ];
 
   const adminMenuItems = [
     {
-      title: "회원관리",
+      title: '회원관리',
       icon: <People />,
-      page: "members",
+      page: 'members',
       forAdmin: true,
     },
     {
-      title: "상품 관리",
+      title: '상품 관리',
       icon: <Store />,
-      page: "productManagement",
+      page: 'productManagement',
       forAdmin: true,
     },
     {
-      title: "요청 관리",
+      title: '요청 관리',
       icon: <Assessment />,
-      page: "requestManagement",
+      page: 'requestManagement',
       forAdmin: true,
     },
     {
-      title: "포인트 관리",
+      title: '포인트 관리',
       icon: <AdminPanelSettings />,
-      page: "admin",
+      page: 'admin',
       forAdmin: true,
     },
   ];
@@ -82,25 +82,25 @@ function Sidebar({ page, setPage, isAdmin, user, onLogout }) {
       sx={{
         width: drawerWidth,
         flexShrink: 0,
-        "& .MuiDrawer-paper": {
+        '& .MuiDrawer-paper': {
           width: drawerWidth,
-          boxSizing: "border-box",
+          boxSizing: 'border-box',
         },
       }}
     >
       <Box sx={{ p: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
           홀덤 동호회 PP 관리
         </Typography>
         {user && (
-          <Typography variant="body2" sx={{ mt: 1, color: "text.secondary" }}>
+          <Typography variant="body2" sx={{ mt: 1, color: 'text.secondary' }}>
             {user.name} 님
           </Typography>
         )}
       </Box>
-      
+
       <Divider />
-      
+
       <List sx={{ pt: 1 }}>
         {menuItems.map((item) => (
           <ListItem key={item.page} disablePadding>
@@ -110,18 +110,18 @@ function Sidebar({ page, setPage, isAdmin, user, onLogout }) {
               sx={{
                 mx: 1,
                 borderRadius: 1,
-                "&.Mui-selected": {
-                  backgroundColor: "primary.main",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "primary.dark",
+                '&.Mui-selected': {
+                  backgroundColor: 'primary.main',
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: 'primary.dark',
                   },
                 },
               }}
             >
               <ListItemIcon
                 sx={{
-                  color: page === item.page ? "white" : "inherit",
+                  color: page === item.page ? 'white' : 'inherit',
                 }}
               >
                 {item.icon}
@@ -135,11 +135,11 @@ function Sidebar({ page, setPage, isAdmin, user, onLogout }) {
       {isAdmin && (
         <>
           <Divider sx={{ my: 2 }}>
-            <Typography variant="caption" sx={{ color: "text.secondary" }}>
+            <Typography variant="caption" sx={{ color: 'text.secondary' }}>
               관리자 메뉴
             </Typography>
           </Divider>
-          
+
           <List>
             {adminMenuItems.map((item) => (
               <ListItem key={item.page} disablePadding>
@@ -149,18 +149,18 @@ function Sidebar({ page, setPage, isAdmin, user, onLogout }) {
                   sx={{
                     mx: 1,
                     borderRadius: 1,
-                    "&.Mui-selected": {
-                      backgroundColor: "secondary.main",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "secondary.dark",
+                    '&.Mui-selected': {
+                      backgroundColor: 'secondary.main',
+                      color: 'white',
+                      '&:hover': {
+                        backgroundColor: 'secondary.dark',
                       },
                     },
                   }}
                 >
                   <ListItemIcon
                     sx={{
-                      color: page === item.page ? "white" : "inherit",
+                      color: page === item.page ? 'white' : 'inherit',
                     }}
                   >
                     {item.icon}
@@ -174,7 +174,7 @@ function Sidebar({ page, setPage, isAdmin, user, onLogout }) {
       )}
 
       <Box sx={{ flexGrow: 1 }} />
-      
+
       <Divider />
       <List>
         <ListItem disablePadding>
@@ -190,4 +190,4 @@ function Sidebar({ page, setPage, isAdmin, user, onLogout }) {
   );
 }
 
-export default Sidebar; 
+export default Sidebar;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Typography,
   Box,
@@ -17,14 +17,14 @@ import {
   DialogActions,
   TextField,
   CircularProgress,
-} from "@mui/material";
-import { apiRequest, API_ENDPOINTS } from "../config/api";
+} from '@mui/material';
+import { apiRequest, API_ENDPOINTS } from '../config/api';
 
 function RequestManagementPage({ user, token, refreshAllData }) {
   const [requests, setRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [rejectReason, setRejectReason] = useState("");
+  const [rejectReason, setRejectReason] = useState('');
   const [loading, setLoading] = useState(true);
 
   // 요청 목록 불러오기
@@ -33,7 +33,7 @@ function RequestManagementPage({ user, token, refreshAllData }) {
     apiRequest(API_ENDPOINTS.REQUESTS.ADMIN)
       .then((data) => setRequests(data))
       .catch((error) => {
-        console.error("요청 목록 로딩 실패:", error);
+        console.error('요청 목록 로딩 실패:', error);
       })
       .finally(() => setLoading(false));
   }, [token]);
@@ -41,31 +41,31 @@ function RequestManagementPage({ user, token, refreshAllData }) {
   const handleApprove = async (requestId) => {
     try {
       await apiRequest(API_ENDPOINTS.REQUESTS.APPROVE(requestId), {
-        method: "PATCH",
+        method: 'PATCH',
       });
-      setRequests(requests.map(req => 
-        req.id === requestId ? { ...req, status: "승인됨" } : req
-      ));
+      setRequests(
+        requests.map((req) => (req.id === requestId ? { ...req, status: '승인됨' } : req))
+      );
       if (refreshAllData) refreshAllData();
     } catch (err) {
-      console.error("승인 실패:", err);
+      console.error('승인 실패:', err);
     }
   };
 
   const handleReject = async (requestId) => {
     try {
       await apiRequest(API_ENDPOINTS.REQUESTS.REJECT(requestId), {
-        method: "PATCH",
+        method: 'PATCH',
         body: JSON.stringify({ reason: rejectReason }),
       });
-      setRequests(requests.map(req => 
-        req.id === requestId ? { ...req, status: "거부됨" } : req
-      ));
+      setRequests(
+        requests.map((req) => (req.id === requestId ? { ...req, status: '거부됨' } : req))
+      );
       setDialogOpen(false);
-      setRejectReason("");
+      setRejectReason('');
       if (refreshAllData) refreshAllData();
     } catch (err) {
-      console.error("거부 실패:", err);
+      console.error('거부 실패:', err);
     }
   };
 
@@ -76,12 +76,12 @@ function RequestManagementPage({ user, token, refreshAllData }) {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "승인됨":
-        return "success";
-      case "거부됨":
-        return "error";
+      case '승인됨':
+        return 'success';
+      case '거부됨':
+        return 'error';
       default:
-        return "warning";
+        return 'warning';
     }
   };
 
@@ -89,8 +89,10 @@ function RequestManagementPage({ user, token, refreshAllData }) {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 2 }}>PP 사용 요청 관리</Typography>
-      <Typography variant="body1" sx={{ mb: 3, color: "text.secondary" }}>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        PP 사용 요청 관리
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
         회원들의 PP 사용 요청을 승인하거나 거부할 수 있습니다.
       </Typography>
 
@@ -132,8 +134,8 @@ function RequestManagementPage({ user, token, refreshAllData }) {
                   />
                 </TableCell>
                 <TableCell>
-                  {request.status === "대기중" && (
-                    <Box sx={{ display: "flex", gap: 1 }}>
+                  {request.status === '대기중' && (
+                    <Box sx={{ display: 'flex', gap: 1 }}>
                       <Button
                         size="small"
                         variant="contained"
@@ -176,8 +178,8 @@ function RequestManagementPage({ user, token, refreshAllData }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDialogOpen(false)}>취소</Button>
-          <Button 
-            onClick={() => handleReject(selectedRequest?.id)} 
+          <Button
+            onClick={() => handleReject(selectedRequest?.id)}
             color="error"
             disabled={!rejectReason.trim()}
           >
@@ -189,4 +191,4 @@ function RequestManagementPage({ user, token, refreshAllData }) {
   );
 }
 
-export default RequestManagementPage; 
+export default RequestManagementPage;
