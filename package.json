@@ -1,0 +1,20 @@
+{
+  "name": "pokrew",
+  "version": "1.0.0",
+  "description": "Pokrew project",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "npm run lint && npm run format"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
+    "prettier": "^3.6.2"
+  }
+}
