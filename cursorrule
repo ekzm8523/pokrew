@@ -1,0 +1,12 @@
+# 커밋 메시지 규칙 (Conventional Commits)
+
+- type: [feat, fix, docs, style, refactor, test, chore]
+- scope: 선택적, 소괄호로 표기 (예: feat(login): ...)
+- subject: 50자 이내, 명령형, 첫 글자 소문자, 마침표 금지
+- body: 선택적, 한 줄 띄우고 작성, 무엇을/왜 변경했는지
+- footer: 선택적, 이슈 트래킹 등
+
+예시:
+feat(login): 로그인 기능 추가
+fix(server): 서버 오류 수정
+docs(readme): 사용법 문서 추가 
