@@ -1,0 +1,67 @@
+# Generic ignores for Java/Kotlin
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.gz
+*.log
+*.sql
+*.h2.db # H2 database files (if used in file mode)
+hs_err_pid*.log
+replay_pid*.log
+
+# Build artifacts
+/build/
+/out/
+/target/
+
+# Gradle related
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+gradlew
+gradlew.bat
+
+# Maven related (if applicable, though project context suggests Gradle)
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+# Exclude Dictionaries folder
+# .idea/dictionaries
+
+# Eclipse
+.project
+.classpath
+.settings/
+*.launch
+.metadata
+
+# VS Code (if used)
+.vscode/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Local configuration files
+# application-local.yml
+# application-local.properties
+# *.env
+# .env.local
+
+# Flyway or Liquibase migration scripts state files (if generated)
+# flyway_schema_history.mv.db
+# liquibase_changelog.mv.db
